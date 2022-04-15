@@ -6,16 +6,18 @@ from Bala import Bala
 from Gamer import Gamer
 
 
-class GalagaPirata:
+class GameController:
     def __init__(self):
         pygame.init()
-        self.screen = pygame.display.set_mode((800, 500))
+        self.maxW = 800
+        self.maxH = 500
+        self.screen = pygame.display.set_mode((self.maxW, self.maxH))
         pygame.display.set_caption("IA GAME")
-        self.color = (230,230,230)
+        self.color = (230, 230, 230)
         self.velocidad = 1
         self.anchobala = 8
         self.altobala = 5
-        self.colorbala=(225,0,0)
+        self.colorbala = (225, 0, 0)
         self.gamer = Gamer(self)
         self.balas = pygame.sprite.Group()
         self.balaTeclaPressed = ''
@@ -29,7 +31,7 @@ class GalagaPirata:
                     if event.key == pygame.K_RIGHT:
                         self.gamer.rigthMove = True
                     if event.key == pygame.K_LEFT:
-                        self.gamer.leftMove =True
+                        self.gamer.leftMove = True
                     if event.key == pygame.K_UP:
                         self.gamer.upMove = True
                     if event.key == pygame.K_DOWN:
@@ -63,6 +65,12 @@ class GalagaPirata:
             for bala in self.balas.copy():
                 if bala.rect.bottom <= 0:
                     self.balas.remove(bala)
+                elif bala.rect.bottom > self.maxH:
+                    self.balas.remove(bala)
+                elif bala.rect.x == 0:
+                    self.balas.remove(bala)
+                elif bala.rect.x == self.maxW:
+                    self.balas.remove(bala)
 
             for bala in self.balas.sprites():
                 bala.dibujarbala()
@@ -75,5 +83,5 @@ class GalagaPirata:
 
 
 if __name__ == "__main__":
-    a = GalagaPirata()
+    a = GameController()
     a.runGame()

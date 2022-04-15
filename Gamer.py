@@ -5,13 +5,14 @@ class Gamer:
     def __init__(self, a_game):
         self.screen = a_game.screen
         self.screen_rect = a_game.screen.get_rect()
-        self.image = pygame.image.load("QUIETO25.jpg")
+        self.image = pygame.image.load("assets/QUIETO25.jpg")
         self.rect = self.image.get_rect()
         self.rect.midbottom = self.screen_rect.midbottom
         self.rigthMove = False
         self.leftMove = False
         self.upMove = False
         self.downMove = False
+        self.maxH = a_game.maxH
 
     def mover(self):
         if self.rigthMove and self.rect.right < self.screen_rect.right:
@@ -20,7 +21,7 @@ class Gamer:
             self.rect.y -= 1
         if self.leftMove and self.rect.x >0:
             self.rect.x -=1
-        if self.downMove and self.rect.midbottom < self.screen_rect.midbottom:
+        if self.downMove and self.rect.y < self.maxH - 20:
             self.rect.y +=1
 
     def toRun(self):
