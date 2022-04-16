@@ -5,6 +5,7 @@ import pygame
 from Bala import Bala
 from Gamer import Gamer
 
+clock = pygame.time.Clock()
 
 class GameController:
     def __init__(self):
@@ -14,7 +15,7 @@ class GameController:
         self.screen = pygame.display.set_mode((self.maxW, self.maxH))
         pygame.display.set_caption("IA GAME")
         self.color = (230, 230, 230)
-        self.velocidad = 1
+        self.velocidad = 3
         self.anchobala = 8
         self.altobala = 5
         self.colorbala = (225, 0, 0)
@@ -75,6 +76,7 @@ class GameController:
             for bala in self.balas.sprites():
                 bala.dibujarbala()
             pygame.display.flip()
+            clock.tick(60)
 
     def _fire_bala(self):
         newBala = Bala(self)
